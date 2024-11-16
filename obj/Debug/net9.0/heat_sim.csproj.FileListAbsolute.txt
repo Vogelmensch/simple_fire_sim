@@ -1,0 +1,14 @@
+C:\Users\david\cs_projects\heat_sim\bin\Debug\net9.0\heat_sim.exe
+C:\Users\david\cs_projects\heat_sim\bin\Debug\net9.0\heat_sim.deps.json
+C:\Users\david\cs_projects\heat_sim\bin\Debug\net9.0\heat_sim.runtimeconfig.json
+C:\Users\david\cs_projects\heat_sim\bin\Debug\net9.0\heat_sim.dll
+C:\Users\david\cs_projects\heat_sim\bin\Debug\net9.0\heat_sim.pdb
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.AssemblyInfoInputs.cache
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.AssemblyInfo.cs
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.csproj.CoreCompileInputs.cache
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.dll
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\refint\heat_sim.dll
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.pdb
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\heat_sim.genruntimeconfig.cache
+C:\Users\david\cs_projects\heat_sim\obj\Debug\net9.0\ref\heat_sim.dll
