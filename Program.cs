@@ -26,17 +26,33 @@ namespace HeatSimulation {
                 PrintGrid(Grid, Size, GridSize);
                 Console.WriteLine();
                 Grid = HeatStep(Grid, Size, GridSize, thermalCoefficient);
-                Thread.Sleep(sleepTime_ms);
+
+                // await user input
+                //while (Console.ReadKey().Key == ConsoleKey.C) {}
+                if (Console.ReadKey().Key == ConsoleKey.M) {
+                    Console.WriteLine("ake fire: X,Y,T");
+                    Console.Write("> ");
+                    String? input = Console.ReadLine();
+                    if (input != null) {
+                        String[] words = input.Split(',');
+                        try {
+                            int x = int.Parse(words[0]);
+                            int y = int.Parse(words[1]);
+                            double temp = double.Parse(words[2]);
+                            SetHeatGrid(x, y, temp);
+                        } catch (Exception e) {
+                            Console.WriteLine(e.Message);
+                        }
+
+                    }
+                }
+
+                //Thread.Sleep(sleepTime_ms);
             }
         }
 
-        // FOR TESTING ONLY
-        public void PrintGridWrapper() {
-            PrintGrid(Grid, Size, GridSize);
-        }
-
         // Print grid with rounded numbers
-        private void PrintGrid(double[] grid, int size, int gridSize) {
+        static private void PrintGrid(double[] grid, int size, int gridSize) {
             double sum = 0;
             for (int i = 0; i < gridSize; i++) {
                 sum += grid[i];
@@ -50,6 +66,9 @@ namespace HeatSimulation {
 
         // Convert coordinates into array index
         static private int GetIndex(int x, int y, int size) {
+            if (x < 0 || x >= size || y < 0 || y >= size) {
+                throw new Exception("Coordinates out of bounds!");
+            }
             return x + size * y;
         }
 
@@ -92,7 +111,6 @@ namespace HeatSimulation {
 
         // Check whether the given index n is at the border.
         // If it's not, add the neighbour's index.
-        // ATM, it may cool down at the border? Maybe?
         private List<int> NeighbourIndices(int n, int size, int gridSize) {
             List<int> neighbourIndices = new List<int>();
 
@@ -124,7 +142,7 @@ namespace HeatSimulation {
 
             int sleepTime = 500;
 
-            heatGrid.RunAndPrint(100, 0.001, sleepTime);
+            heatGrid.RunAndPrint(100000, 0.01, sleepTime);
         }
     }
 
