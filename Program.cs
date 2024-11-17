@@ -82,9 +82,18 @@ namespace HeatSimulation {
         // Set temperature of one Cell in Grid
         public void SetHeatGrid(int x, int y, double temp) {
             Grid[GetIndex(x,y,Size)].Temp = temp;
+            Grid[GetIndex(x,y,Size)].Ignite_or_extinguish();
         }
 
         public void RunAndPrint(int iterations, double thermalCoefficient, int sleepTime_ms) {
+            Console.WriteLine("--- 🔥 FIRE SIMULATION 🔥 ---");
+            Console.WriteLine("Press any key to view the next iteration.");
+            Console.WriteLine("M:\tChange temperature at point x,y");
+            Console.WriteLine("Q:\tQuit");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to start!");
+            Console.WriteLine();
+            Console.ReadKey();
             for (int i = 0; i < iterations; i++) {
                 Console.WriteLine("Iteration {0}", i);
                 PrintGrid(Grid, Size, GridSize);
@@ -92,7 +101,11 @@ namespace HeatSimulation {
                 Grid = HeatStep(Grid, Size, GridSize, thermalCoefficient);
 
                 // await user input
-                if (Console.ReadKey().Key == ConsoleKey.M) {
+                ConsoleKey key = Console.ReadKey().Key;
+                if (key == ConsoleKey.Q) {
+                    return;
+                }
+                if (key == ConsoleKey.M) {
                     Console.WriteLine("ake fire: X,Y,T");
                     Console.Write("> ");
                     string? input = Console.ReadLine();
@@ -108,14 +121,13 @@ namespace HeatSimulation {
                         }
 
                     }
-                }
+                } 
 
                 // Thread.Sleep(sleepTime_ms);
             }
         }
 
         // Print grid with rounded numbers
-        // TODO: Add FIRE 🔥🔥🔥🔥🔥
         static private void PrintGrid(Tile[] grid, int size, int gridSize) {
             double sum = 0;
             for (int i = 0; i < gridSize; i++) {
@@ -233,9 +245,8 @@ namespace HeatSimulation {
 
     class Heat_sim {
         static void Main(string[] args) {
-            Console.WriteLine("🔥🔥🔥🔥🔥🔥");
             HeatGrid2D heatGrid = new HeatGrid2D(8, 100, 60, 5, 2);
-            heatGrid.SetHeatGrid(1, 1, 500);
+            // heatGrid.SetHeatGrid(1, 1, 500);
 
             int sleepTime = 500;
 
