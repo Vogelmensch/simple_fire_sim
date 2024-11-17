@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Text;
 
 namespace HeatSimulation {
+
 
     public class Tile {
 
@@ -85,12 +87,16 @@ namespace HeatSimulation {
             Grid[GetIndex(x,y,Size)].Ignite_or_extinguish();
         }
 
-        public void RunAndPrint(int iterations, double thermalCoefficient, int sleepTime_ms) {
+        public int RunAndPrint(int iterations, double thermalCoefficient, int sleepTime_ms) {
+            Console.WriteLine();
             Console.WriteLine("--- 🔥 FIRE SIMULATION 🔥 ---");
+            Console.WriteLine();
             Console.WriteLine("Press any key to view the next iteration.");
             Console.WriteLine("M:\tChange temperature at point x,y");
+            Console.WriteLine("R:\tRestart");
             Console.WriteLine("Q:\tQuit");
             Console.WriteLine();
+            Console.WriteLine("Make sure your console window is large enough, so that the grid is displayed correctly.");
             Console.WriteLine("Press any key to start!");
             Console.WriteLine();
             Console.ReadKey();
@@ -103,7 +109,16 @@ namespace HeatSimulation {
                 // await user input
                 ConsoleKey key = Console.ReadKey().Key;
                 if (key == ConsoleKey.Q) {
-                    return;
+                    Console.WriteLine("uit? Y / [N]");
+                    if (Console.ReadKey().Key == ConsoleKey.Y) {
+                        return 0;
+                    } 
+                }
+                if (key == ConsoleKey.R) {
+                    Console.WriteLine("estart? Y / [N]");
+                    if (Console.ReadKey().Key == ConsoleKey.Y) {
+                        return 1;
+                    } 
                 }
                 if (key == ConsoleKey.M) {
                     Console.WriteLine("ake fire: X,Y,T");
@@ -125,6 +140,7 @@ namespace HeatSimulation {
 
                 // Thread.Sleep(sleepTime_ms);
             }
+            return 0;
         }
 
         // Print grid with rounded numbers
@@ -245,12 +261,17 @@ namespace HeatSimulation {
 
     class Heat_sim {
         static void Main(string[] args) {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             HeatGrid2D heatGrid = new HeatGrid2D(8, 100, 60, 5, 2);
             // heatGrid.SetHeatGrid(1, 1, 500);
 
             int sleepTime = 500;
 
-            heatGrid.RunAndPrint(100000, 0.03, sleepTime);
+            while(heatGrid.RunAndPrint(100000, 0.03, sleepTime) == 1) {
+                Console.Write("\n\n\n\n\n\n\n");
+                heatGrid = new HeatGrid2D(8, 100, 60, 5, 2);
+            }
         }
     }
 
